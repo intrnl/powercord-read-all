@@ -24,9 +24,8 @@ class ReadAll extends Plugin {
         React.createElement(CMButton, {
           name: 'Mark All As Read',
           onClick: () => {
-            for (let guild in GuildStore.getGuilds()) {
-              GuildActions.markGuildAsRead(guild)
-            }
+            const guilds = Object.keys(GuildStore.getGuilds())
+            GuildActions.markGuildsAsRead(guilds)
           },
         }),
       ]
