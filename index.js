@@ -19,7 +19,6 @@ class ReadAll extends Plugin {
     const GuildActions = getModule(['markGuildAsRead'], false)
 
     inject('powercord-read-all_cm', GuildContextMenu.prototype, 'render', (_, res) => {
-      console.log(res.props.children[0])
       res.props.children[0].props.children = [
         res.props.children[0].props.children,
         React.createElement(CMButton, {
