@@ -13,10 +13,16 @@ class ReadAll extends Plugin {
     uninject('powercord-read-all_cm')
   }
 
-  _patchContextMenu () {
-    const GuildContextMenu = getModuleByDisplayName('GuildContextMenu', false)
-    const GuildStore = getModule(['getGuilds'], false)
-    const GuildActions = getModule(['markGuildAsRead'], false)
+  async _patchContextMenu () {
+    const [
+      GuildContextMenu,
+      GuildStore,
+      GuildActions,
+    ] = await Promise.all([
+      getModuleByDisplayName('GuildContextMenu'),
+      getModule(['getGuilds']),
+      getModule(['markGuildAsRead']),
+    ])
 
     inject('powercord-read-all_cm', GuildContextMenu.prototype, 'render', (_, res) => {
       res.props.children[0].props.children = [
